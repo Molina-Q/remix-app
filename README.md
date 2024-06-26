@@ -1,5 +1,7 @@
 # Welcome to Remix!
 
+Made with following tutorial : <a href="https://www.youtube.com/watch?v=Sl4sg33-PEk">https://www.youtube.com/watch?v=Sl4sg33-PEk</a>
+
 - 📖 [Remix docs](https://remix.run/docs)
 
 ## Development

@@ -1,4 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
+import { json, type MetaFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,42 +8,27 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+  const data: { id: string; title: string; body: string; userId: string; }[] = await response.json();
+
+  return json({ blogs: data });
+};
+
 export default function Index() {
+  const { blogs } = useLoaderData<typeof loader>();
+
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="grid grid-cols-4 gap-3">
+      {blogs.map((blog) => (
+        <Link 
+          to={`/blogs/${blog.id}`}
+          className="p-3 shadow-md rounded-sm" 
+          key={blog.id}
+        >
+          {blog.body}
+        </Link>
+      ))}
     </div>
   );
 }

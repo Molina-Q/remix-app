@@ -1,6 +1,6 @@
 
 import { ActionFunction, LoaderFunctionArgs } from '@remix-run/node';
-import { Form, json, Link, useLoaderData, type MetaFunction } from '@remix-run/react';
+import { Form, json, Link, useLoaderData, useNavigation, type MetaFunction } from '@remix-run/react';
 import React from 'react'
 
 export const meta: MetaFunction = () => {
@@ -34,6 +34,10 @@ export const action:ActionFunction = async ({ request, params }) => {
 
 export default function Blog() {
   const { blog } = useLoaderData<typeof loader>();
+
+  const navigation = useNavigation();
+
+  const isSubmitting = !(navigation.state === 'idle');
 
   return (
     <div>

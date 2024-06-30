@@ -44,7 +44,7 @@ export default function Blog() {
       <Link to={'/'}>
         HOME
       </Link>
-      <div className='m-4 p-4 rounded-sm w-[500px] border'>
+      <div className='p-3 rounded-sm w-[500px] border'>
         <h1 className='font-bold text-xl mb-3'>{blog.title}</h1>
         <p>{blog.body}</p>
       </div>

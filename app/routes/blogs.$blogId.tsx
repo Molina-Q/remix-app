@@ -53,7 +53,7 @@ export default function Blog() {
         <div className='p-3 border my-5 flex space-x-3 max-w-fit flex-col items-center'
         >
           <input className='border' name='title' placeholder='title' />
-          <button type='submit'>Update</button>
+          <button type='submit'>{isSubmitting ? "Submitting" : "Update" }</button>
         </div>
       </Form>
     </div>
